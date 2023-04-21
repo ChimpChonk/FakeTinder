@@ -4,8 +4,8 @@
 --drop database Dating;
 --go
 
---create database Dating;
---go
+create database Dating;
+go
 
 use Dating;
 go
@@ -128,54 +128,54 @@ insert into Gender (GenderName, Elaborate) values ('TransSexual', 'modified body
 insert into Gender (GenderName, Elaborate) values ('hermaphrodite ', 'having both male and female sex organs or other sexual characteristics')
 	
 -- USERS TABLE
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Palle', 'Westermann', 'pwe@tec.dk', 'prut', 'prut123.', 'prut123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Palle', 'Westermann', 'pwe@tec.dk', 'prut', 'prut123.', 'prut123.', getdate())
 
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Hansi', 'Hinterseer', 'hansi@lousymusic.com', 'hansi', 'hansi123.', 'hansi123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Hansi', 'Hinterseer', 'hansi@lousymusic.com', 'hansi', 'hansi123.', 'hansi123.', getdate())
 
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Ulla', 'Drac', 'drac@lousymusic.com', 'drac', 'drac123.', 'drac123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Ulla', 'Drac', 'drac@lousymusic.com', 'drac', 'drac123.', 'drac123.', getdate())
 
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Benny', 'Hill', 'Hill@humour.com', 'Hill', 'Hill123.', 'Hill123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Benny', 'Hill', 'Hill@humour.com', 'Hill', 'Hill123.', 'Hill123.', getdate())
 
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Delilah', 'Mums', 'lilah@bt.dk', 'Laila', 'Laila123.', 'Laila123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Delilah', 'Mums', 'lilah@bt.dk', 'Laila', 'Laila123.', 'Laila123.', getdate())
 
-insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
-values
-('Karla', 'Kumme', 'karla@tec.dk', 'karla', 'karla123.', 'karla123.', getdate())
+--insert into [Users] (FirstName, LastName, Email, [Login], [Password],[Password2],CreateDate)
+--values
+--('Karla', 'Kumme', 'karla@tec.dk', 'karla', 'karla123.', 'karla123.', getdate())
 
---USERPROFILE TABLE
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('KrudtUglen', '1967-07-26', 180, 'Just tooooo nice', 3400, 1, 1)
+----USERPROFILE TABLE
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('KrudtUglen', '1967-07-26', 180, 'Just tooooo nice', 3400, 1, 1)
 
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('BigTrouble', '1977-10-26', 190, 'Tallish girlie', 3450, 4, 2)
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('BigTrouble', '1977-10-26', 190, 'Tallish girlie', 3450, 4, 2)
 
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('Singasongman', '1897-11-07', 193, 'Musika para me', 3000, 3, 3)
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('Singasongman', '1897-11-07', 193, 'Musika para me', 3000, 3, 3)
 
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('UllaBulla', '2001-11-07', 173, 'Bloody me', 3200, 4, 4)
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('UllaBulla', '2001-11-07', 173, 'Bloody me', 3200, 4, 4)
 
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('Bennyman', '2003-10-17', 93, 'Up HIll', 3460, 3, 5)
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('Bennyman', '2003-10-17', 93, 'Up HIll', 3460, 3, 5)
 
-insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
-values
-('Delilah', '1923-11-11', 93, 'Oldie', 3460, 2, 6)
+--insert into UserProfile (UserName, BirthDate, Height, AboutMe, CityId, GenderId, UsersId)
+--values
+--('Delilah', '1923-11-11', 93, 'Oldie', 3460, 2, 6)
 
 
 
