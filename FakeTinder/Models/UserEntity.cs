@@ -22,7 +22,7 @@ namespace FakeTinder.Models
 		[Required(ErrorMessage = "Password is required")]
 		public string Password { get; set; }
 
-		[Required(ErrorMessage = "Password2 is required")]
+		[Required(ErrorMessage = "Co-Password is required")]
 		public string Password2 { get; set; }
 
 		public DateTime CreateDate { get; set; } = DateTime.Now;
