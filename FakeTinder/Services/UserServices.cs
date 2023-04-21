@@ -21,7 +21,7 @@ namespace FakeTinder.Services
 				repository.AddUser(user);
 				return true;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -58,7 +58,7 @@ namespace FakeTinder.Services
 				repository.UpdateUser(user);
 				return true;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -71,7 +71,7 @@ namespace FakeTinder.Services
 				_user = repository.GetLogin(inputLogin, inputPassword);
 				return _user;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return _user;
 			}

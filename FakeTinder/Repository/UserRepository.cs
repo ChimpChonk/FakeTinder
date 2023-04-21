@@ -14,8 +14,7 @@ namespace FakeTinder.Repository
 
 		public UserRepository(IConfiguration configuration)
 		{
-			_configuration = configuration;
-			connectionString = _configuration.GetConnectionString("DefaultConnection");
+			connectionString = configuration.GetConnectionString("DefaultConnection");
 		}
 
 		public IEnumerable<UserEntity> GetAllUsers()
@@ -54,6 +53,7 @@ namespace FakeTinder.Repository
 			{
 				SqlCommand cmd = new SqlCommand("usp_AddNewUser", con);
 				cmd.CommandType = CommandType.StoredProcedure;
+
 				cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
 				cmd.Parameters.AddWithValue("@LastName", user.LastName);
 				cmd.Parameters.AddWithValue("@Email", user.Email);
@@ -61,11 +61,10 @@ namespace FakeTinder.Repository
 				cmd.Parameters.AddWithValue("@Password", user.Password);
 				cmd.Parameters.AddWithValue("@Password2", user.Password2);
 				cmd.Parameters.AddWithValue("@CreateDate", user.CreateDate);
-				cmd.Parameters.AddWithValue("@DeleteDate", user.DeleteDate);
 				con.Open();
-				int i = cmd.ExecuteNonQuery();
+				int res = cmd.ExecuteNonQuery();
 				con.Close();
-				if (i != 1) { returnValue = false; }
+				if (res != 1) { returnValue = false; }
 			}
 			return returnValue;
 		}
