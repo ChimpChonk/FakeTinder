@@ -4,6 +4,8 @@
 
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
+@using System.ComponentModel.DataAnnotations
+
 
 
 <PageTitle>Login</PageTitle>
@@ -53,9 +55,13 @@
 		NavigationManager.NavigateTo("/register-account");
 	}
 
-	//public class LoginUser
-	//{
-	//	public string InLogin { get; set; }
-	//	public string InPassword { get; set; }
-	//}
+	public class LoginUser
+	{
+
+		[Required(ErrorMessage = "Login required")]
+		public string InLogin { get; set; }
+
+		[Required(ErrorMessage = "Password required")]
+		public string InPassword { get; set; }
+	}
 }
