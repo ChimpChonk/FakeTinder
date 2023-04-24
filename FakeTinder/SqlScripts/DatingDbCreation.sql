@@ -40,13 +40,12 @@ create table UserProfile
 (
 	Id int primary key identity(1,1),
 	UserName nvarchar(50) unique not null,
-	BirthDate datetime not null,
+	BirthDate datetime null,
 	Height int not null default 0,
 	AboutMe nvarchar(255), 
 	CityId int foreign key references City(Id),
 	GenderId int foreign key references Gender(Id),
 	UsersId int foreign key references Users(Id),
-	check (BirthDate <= dateadd(year, -18, getdate()))
 )
 
 go

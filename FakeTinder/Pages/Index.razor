@@ -9,7 +9,7 @@
 
 
 <PageTitle>Login</PageTitle>
-<div>
+<div class="justify-content:center">
 	<EditForm Model="loginUser" OnValidSubmit="SubmitLogin">
 		<DataAnnotationsValidator />
 		<div>
@@ -48,6 +48,7 @@
 		{
 			NavigationManager.NavigateTo("/register-account");
 		}
+
 	}
 
 	protected async Task Register()
