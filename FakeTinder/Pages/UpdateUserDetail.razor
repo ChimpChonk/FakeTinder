@@ -4,3 +4,36 @@
 @inject IUserService UserServices
 
 <PageTitle>Update detail</PageTitle>
+
+<EditForm Model="@user" OnValidSubmit="Update">
+	<DataAnnotationsValidator />
+
+</EditForm>
+
+@code {
+	[Parameter]
+	public int userId { get; set; }
+	protected UserEntity user = new();
+
+	protected override async Task OnParametersSetAsync()
+	{
+		var userList = UserServices.GetAllUsers();
+		user = userList.Where(x => x.Id == userId).FirstOrDefault();
+	}
+
+	protected async Task Update()
+	{
+		if (user.Id < 1)
+		{
+			return;
+		}
+
+		UserServices.UpdateUser(user);
+		NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
+	}
+
+	protected void Cancel()
+	{
+		
+	}
+}
