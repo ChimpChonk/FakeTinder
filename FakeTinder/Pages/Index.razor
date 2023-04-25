@@ -9,8 +9,8 @@
 
 
 <PageTitle>Login</PageTitle>
-<div class="justify-content:center">
-	<EditForm Model="loginUser" OnValidSubmit="SubmitLogin">
+<div>
+	<EditForm Model="loginUser">
 		<DataAnnotationsValidator />
 		<div>
 			<div class="mb-2">
@@ -28,8 +28,8 @@
 				<ValidationMessage For="@(() => loginUser.InPassword)" />
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Submit</button>
-				<button class="btn btn-secondary" @onclick="Register">Register Account</button>
+				<button type="button" @onclick="(async () => await  SubmitLogin())" class=" btn btn-success">Submit</button>
+				<button type="button" @onclick="(async () => await  Register())" class="btn btn-primary">Register Account</button>
 			</div>
 		</div>
 	</EditForm>
@@ -46,7 +46,7 @@
 
 		if (loginUser.InLogin == user.Login && loginUser.InPassword == user.Password)
 		{
-			NavigationManager.NavigateTo("/register-account");
+			NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
 		}
 
 	}

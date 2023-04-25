@@ -1,0 +1,53 @@
+﻿@page "/user-detail/{userId:int}"
+
+@inject NavigationManager NavigationManager
+@inject IUserService UserServices
+
+<PageTitle>@user.Login Detail</PageTitle>
+
+<div class="position-absolute top-50 start-50 translate-middle " style="display: flex; justify-content: center;">
+	<div class="card " style="width: 28rem;">
+		<img src="/Img/person-badge.svg" class="card-img-top">
+		<div class="card-body">
+			<h2 class="card-title" style="text-align: center;">@user.Login</h2>
+		</div>
+		<div style="display: flex; justify-content: center;">
+			<div>
+				<p>Firstname: @user.FirstName</p>
+				<p>Lastname: @user.LastName</p>
+				<p>Email: @user.Email</p>
+			</div>
+		</div>
+		<div class="card-body">
+			<button type="button" @onclick="(async () => await  LogOut())" class="btn btn-danger">Log Out</button>
+			<button type="button" @onclick="(async () => await  NavigateToUpdateUser(user.Id))" class="btn btn-primary">Edit</button>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int UserId { get; set; }
+
+	protected UserEntity user = new();
+
+	protected override async Task OnParametersSetAsync()
+	{
+		var userList = UserServices.GetAllUsers();
+		user = userList.Where(x => x.Id == UserId).FirstOrDefault();
+	}
+
+	protected async Task LogOut()
+	{
+		NavigationManager.NavigateTo("/");
+	}
+
+	protected async Task NavigateToUpdateUser(int userId)
+	{
+		//NavigationManager.NavigateTo($"/update-user/{userId}");
+	}
+
+
+
+
+}
