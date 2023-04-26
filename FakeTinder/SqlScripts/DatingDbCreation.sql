@@ -52,7 +52,6 @@ go
 create table ProfilePictures
 (
 	Id int primary key identity(1,1),
-	Title nvarchar(50) not null,
 	PicURL nvarchar(100) not null,
 	UserProfileId int foreign key references UserProfile(Id)
 )
