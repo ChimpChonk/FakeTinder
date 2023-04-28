@@ -9,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IUserService, UserServices>();
+builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

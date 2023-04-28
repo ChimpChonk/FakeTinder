@@ -2,6 +2,7 @@
 
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
+@inject IUserProfileService UserProfileServices
 
 <PageTitle>Update detail</PageTitle>
 
@@ -14,11 +15,12 @@
 	[Parameter]
 	public int userId { get; set; }
 	protected UserEntity user = new();
+	protected UserProfileEntity userProfile = new();
 
 	protected override async Task OnParametersSetAsync()
 	{
-		var userList = UserServices.GetAllUsers();
-		user = userList.Where(x => x.Id == userId).FirstOrDefault();
+		var userList = UserProfileServices.GetAllUserProfiles();
+		userProfile = userList.Where(x => x.Id == userId).FirstOrDefault();
 	}
 
 	protected async Task Update()
@@ -28,7 +30,7 @@
 			return;
 		}
 
-		UserServices.UpdateUser(user);
+		UserProfileServices.UpdateUserProfile(userId);
 		NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
 	}
 

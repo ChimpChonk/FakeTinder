@@ -30,17 +30,63 @@ namespace FakeTinder.Repository
 				{
 					UserProfileEntity userProfile = new UserProfileEntity();
 					userProfile.Id = Convert.ToInt32(rdr["Id"]);
-					userProfile.UserName = rdr["ProfileId"].ToString();
+					userProfile.UserName = rdr["UserName"].ToString();
 					userProfile.BirthDate = Convert.ToDateTime(rdr["BirthDate"].ToString());
 					userProfile.Height = Convert.ToInt32(rdr["Height"]);
 					userProfile.AboutMe = rdr["AboutMe"].ToString();
 					userProfile.City.CityName = rdr["CityName"].ToString();
 					userProfile.Gender.GenderName = rdr["GenderName"].ToString();
+					userProfile.User.FirstName = rdr["FirstName"].ToString();
+					userProfile.User.LastName = rdr["LastName"].ToString();
+					userProfile.User.Email = rdr["Email"].ToString();
 
-
+					lstUsers.Add(userProfile);
 				}
+				con.Close();
 			}
+
+			return lstUsers;
 		}
 
+		public bool UpdateUserProfile(UserProfileEntity userProfile)
+		{
+			bool returnValue = true;
+			using (SqlConnection con = new SqlConnection(connectionString))
+			{
+				SqlCommand cmd = new SqlCommand("usp_UpdateUserProfile", con);
+				cmd.CommandType = CommandType.StoredProcedure;
+
+				cmd.Parameters.AddWithValue("@UserName", userProfile.UserName);
+				//cmd.Parameters.AddWithValue("@FirstName", userProfile.User.FirstName);
+				//cmd.Parameters.AddWithValue("@LastName", userProfile.User.LastName);
+				cmd.Parameters.AddWithValue("@BirthDate", userProfile.BirthDate);
+				cmd.Parameters.AddWithValue("@AboutMe", userProfile.AboutMe);
+				cmd.Parameters.AddWithValue("@Height", userProfile.Height);
+				cmd.Parameters.AddWithValue("@GenderName", userProfile.Gender.Id);
+				cmd.Parameters.AddWithValue("@CityName", userProfile.City.Id);
+				//cmd.Parameters.AddWithValue("@Email", userProfile.User.Email);
+				con.Open();
+				int res = cmd.ExecuteNonQuery();
+				con.Close();
+				if (res != 1) { returnValue = false; }
+			}
+			return returnValue;
+		}
+
+		public bool DeleteUserProfile(int? Id)
+		{
+			bool returnValue = true;
+			using (SqlConnection con = new SqlConnection(connectionString))
+			{
+				SqlCommand cmd = new SqlCommand("usp_DeleteUserProfile", con);
+				cmd.CommandType = CommandType.StoredProcedure;
+				cmd.Parameters.AddWithValue("@Id", Id);
+				con.Open();
+				int res = cmd.ExecuteNonQuery();
+				con.Close();
+				if (res != 1) { return returnValue = false; }
+			}
+			return returnValue;
+		}
 	}
 }

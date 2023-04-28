@@ -11,3 +11,25 @@ BEGIN
     GenderId = @genderid
     WHERE UsersId = @usersid
 END
+--USE [DATING]
+--GO 
+--CREATE PROCEDURE [dbo].[usp_UpdateUserProfile]
+--	@Id INT,
+--	@UserName NVARCHAR(50),
+--	@BirthDate DATETIME,
+--	@Height INT,
+--	@AboutMe NVARCHAR(255),
+--	@CityId INT,
+--	@GenderId INT
+--AS
+--BEGIN
+--	UPDATE UserProfile
+--	SET UserName = @UserName,
+--		BirthDate = @BirthDate,
+--		Height = @Height,
+--		AboutMe = @AboutMe,
+--		CityId = @CityId,
+--		GenderId = @GenderId
+--	WHERE Id = @Id
+--END
+

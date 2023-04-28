@@ -2,6 +2,7 @@
 
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
+@inject IUserProfileService UserProfileServices
 
 <PageTitle>@user.Login Detail</PageTitle>
 
@@ -13,9 +14,13 @@
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<div>
-				<p>Firstname: @user.FirstName</p>
-				<p>Lastname: @user.LastName</p>
-				<p>Email: @user.Email</p>
+				<p>Full Name: @userProfile.User.FirstName @userProfile.User.LastName</p>
+				<p>User Name: @userProfile.UserName</p>
+				<p>Aboutme: @userProfile.AboutMe</p>
+				<p>Age: @Age()</p>
+				<p>Height: @userProfile.Height</p>
+				<p>Location: @userProfile.City.CityName</p>
+				<p>Gender: @userProfile.Gender.GenderName</p>
 			</div>
 		</div>
 		<div class="card-body">
@@ -30,11 +35,18 @@
 	public int UserId { get; set; }
 
 	protected UserEntity user = new();
+	protected UserProfileEntity userProfile = new();
+
+	protected string Age()
+	{
+		var age = DateTime.Now.Year - userProfile.BirthDate.Year;
+		return Convert.ToString(age);
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
-		var userList = UserServices.GetAllUsers();
-		user = userList.Where(x => x.Id == UserId).FirstOrDefault();
+		var userList = UserProfileServices.GetAllUserProfiles();
+		userProfile = userList.Where(x => x.Id == UserId).FirstOrDefault();
 	}
 
 	protected async Task LogOut()
@@ -44,10 +56,6 @@
 
 	protected async Task NavigateToUpdateUser(int userId)
 	{
-		//NavigationManager.NavigateTo($"/update-user/{userId}");
+		NavigationManager.NavigateTo($"/update-user-detail/{userId}");
 	}
-
-
-
-
 }
