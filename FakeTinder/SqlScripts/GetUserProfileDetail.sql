@@ -2,10 +2,19 @@ USE [Dating]
 GO
 CREATE PROCEDURE [dbo].[usp_GetUserProfileDetail]
 AS BEGIN
-SELECT [UserProfile].[Id], [UserProfile].[UserName], [UserProfile].[BirthDate], [UserProfile].[Height],
-	[UserProfile].[AboutMe], [City].[CityName] AS [City], [Gender].[GenderName] AS Gender, [Users].[FirstName], [Users].[LastName]
-	FROM UserProfile
-	JOIN [Users] ON [UserProfile].[UsersId] = [Users].[Id]
-	 JOIN [City] ON [UserProfile].[CityId] = [City].[Id]
-	 JOIN [Gender] ON [UserProfile].[GenderId] = [Gender].[Id]	
+SELECT 
+        up.Id as ProfileId, 
+        up.UserName, 
+        up.BirthDate, 
+        up.Height, 
+        up.AboutMe, 
+        c.CityName, 
+        g.GenderName, 
+        u.FirstName, 
+        u.LastName, 
+        u.Email 
+    FROM UserProfile up
+    JOIN Users u ON u.Id = up.UsersId
+    JOIN Gender g ON g.Id = up.GenderId
+    JOIN City c ON c.Id = up.CityId
 END;
