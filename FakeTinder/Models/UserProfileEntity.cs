@@ -7,6 +7,8 @@ namespace FakeTinder.Models
 	{
 		public int Id { get; set; }
 		public string UserName { get; set; }
+
+		[Required(ErrorMessage ="Date of birth required")]
 		public DateTime BirthDate { get; set; }
 		public int Height { get; set; }
 		public string AboutMe { get; set; }

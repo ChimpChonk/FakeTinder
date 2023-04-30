@@ -17,7 +17,33 @@
 	</div>
 	<div class="mb-3">
 		<label for="LastName" class="form-label">Last Name</label>
-
+		<div class="col-md-4">
+			<InputText class="form-control" @bind-Value="userProfile.User.LastName" />
+		</div>
+		<ValidationMessage For="@(() => userProfile.User.LastName)" />
+	</div>
+	<div class="mb-3">
+		<label for="UserName" class="form-label">User Name</label>
+		<div class="col-md-4">
+			<InputText class="form-control" @bind-Value="userProfile.UserName" />
+		</div>
+		<ValidationMessage For="@(() => userProfile.UserName)" />
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<InputDate type="date" @bind-Value="userProfile.BirthDate" />
+			</div>
+			<ValidationMessage For="@(() => userProfile.BirthDate)" />
+		</div>
+	</div>
+	<div>
+		<div class="mb-3">
+			<label for="Height" class="form-label">Height</label>
+			<div class="col-md-4">
+				<InputNumber class="form-control" @bind-Value="userProfile.Height"/>
+			</div>
+		</div>
 	</div>
 </EditForm>
 

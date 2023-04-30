@@ -75,7 +75,7 @@
 			return;
 		}
 		UserServices.AddUser(user);
-		NavigationManager.NavigateTo("/login");
+		NavigationManager.NavigateTo($"/update-user-detail/{user.Id.ToString()}");
 	}
 	protected void Cancel()
 	{
