@@ -4,6 +4,7 @@
 
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
+@inject IAdoGetProfileData AdoGetProfileData
 @using System.ComponentModel.DataAnnotations
 
 
@@ -47,6 +48,10 @@
 		if (loginUser.InLogin == user.Login && loginUser.InPassword == user.Password)
 		{
 			NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
+		}
+		else
+		{
+			return;
 		}
 
 	}

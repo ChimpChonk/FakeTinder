@@ -29,13 +29,13 @@ namespace FakeTinder.Repository
 				while (rdr.Read())
 				{
 					UserProfileEntity userProfile = new UserProfileEntity();
-					userProfile.Id = Convert.ToInt32(rdr["Id"]);
+					userProfile.Id = Convert.ToInt32(rdr["ProfileId"]);
 					userProfile.UserName = rdr["UserName"].ToString();
 					userProfile.BirthDate = Convert.ToDateTime(rdr["BirthDate"].ToString());
 					userProfile.Height = Convert.ToInt32(rdr["Height"]);
-					userProfile.AboutMe = rdr["AboutMe"].ToString();
-					userProfile.City.CityName = rdr["CityName"].ToString();
-					userProfile.Gender.GenderName = rdr["GenderName"].ToString();
+					userProfile.AboutMe = rdr["AboutMe"] == DBNull.Value? null : rdr.GetString("AboutMe").ToString();
+					userProfile.City.CityName = rdr["CityName"] == DBNull.Value ? null : rdr.GetString("CityName").ToString();
+					userProfile.Gender.GenderName = rdr["GenderName"] == DBNull.Value ? null : rdr.GetString("GenderName").ToString();
 					userProfile.User.FirstName = rdr["FirstName"].ToString();
 					userProfile.User.LastName = rdr["LastName"].ToString();
 					userProfile.User.Email = rdr["Email"].ToString();

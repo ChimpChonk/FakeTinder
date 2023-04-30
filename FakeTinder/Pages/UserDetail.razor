@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
 @inject IUserProfileService UserProfileServices
+@inject IGetProfileDataService GetProfileDataService
 
 <PageTitle>@user.Login Detail</PageTitle>
 
@@ -14,7 +15,7 @@
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<div>
-				<p>Full Name: @userProfile.User.FirstName @userProfile.User.LastName</p>
+				<p>Full Name: @userProfile.User.FirstName @userProfile.User.LastName </p>
 				<p>User Name: @userProfile.UserName</p>
 				<p>Aboutme: @userProfile.AboutMe</p>
 				<p>Age: @Age()</p>

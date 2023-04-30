@@ -1,5 +1,6 @@
 using FakeTinder.Repository;
 using FakeTinder.Services;
+using FakeTinder.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IUserService, UserServices>();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
+builder.Services.AddScoped<IAdoGetProfileData, AdoGetProfileData>();
+builder.Services.AddTransient<IGetProfileDataService, GetProfileDataService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 var app = builder.Build();
