@@ -11,6 +11,7 @@ BEGIN
         up.AboutMe,
         c.CityName, 
         g.GenderName, 
+		u.Id as UserID,
         u.FirstName, 
         u.LastName, 
         u.Email 

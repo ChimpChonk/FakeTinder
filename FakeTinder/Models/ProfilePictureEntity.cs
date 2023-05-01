@@ -4,7 +4,7 @@
 	{
 		public int Id { get; set; }
 		public string PicURL { get; set; }
-		public UserProfileEntity UserProfile { get; set; }
+		public UserProfileEntity UserProfile { get; set; } = new UserProfileEntity();
 	}
 }
 

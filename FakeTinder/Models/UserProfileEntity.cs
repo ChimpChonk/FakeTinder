@@ -12,9 +12,9 @@ namespace FakeTinder.Models
 		public DateTime BirthDate { get; set; }
 		public int Height { get; set; }
 		public string AboutMe { get; set; }
-		public CityEntity City { get; set; }
-		public GenderEntity Gender { get; set; }
-		public UserEntity User { get; set; }
+		public CityEntity City { get; set; } = new CityEntity();
+		public GenderEntity Gender { get; set; } = new GenderEntity();
+		public UserEntity User { get; set; } = new UserEntity();
 
 	}
 }

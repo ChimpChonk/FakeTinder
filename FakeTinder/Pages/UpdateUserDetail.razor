@@ -1,9 +1,10 @@
-﻿@page "/update-user-detail/{userId:int}"
+﻿@page "/update-user-detail"
 
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
 @inject IUserProfileService UserProfileServices
 @inject IGetProfileDataService GetProfileDataService
+@inject LoggedUserService LoggedUserService
 
 
 <PageTitle>Update detail</PageTitle>
@@ -31,34 +32,39 @@
 		</div>
 		<ValidationMessage For="@(() => userProfile.UserName)" />
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<InputDate type="date" @bind-Value="userProfile.BirthDate" />
+	<div class="md-3">
+		<div class="col-sm-12">
+			<label for="BirthDate" class="form-label">Birth Date</label>
+			<div class="col-md-4">
+				<input type="date" @bind-value="userProfile.BirthDate" />
 			</div>
-			<ValidationMessage For="@(() => userProfile.BirthDate)" />
 		</div>
+		<ValidationMessage For="@(() => userProfile.BirthDate)" />
 	</div>
 	<div>
 		<div class="mb-3">
 			<label for="Height" class="form-label">Height</label>
 			<div class="col-md-4">
-				<InputNumber class="form-control" @bind-Value="userProfile.Height"/>
+				<InputNumber class="form-control" @bind-Value="userProfile.Height" />
 			</div>
 		</div>
 	</div>
 </EditForm>
 
 @code {
-	[Parameter]
-	public int userId { get; set; }
-	protected UserEntity user = new();
-	protected UserProfileEntity userProfile = new();
 
-	protected override async Task OnParametersSetAsync()
+	public int UserId { get; set; }
+	protected UserEntity user;
+	protected UserProfileEntity userProfile;
+
+	protected override void OnInitialized()
 	{
+		user = new UserEntity();
+		userProfile = new UserProfileEntity();
+		UserId = LoggedUserService.User.Id;
 		var userList = UserProfileServices.GetAllUserProfiles();
-		userProfile = userList.Where(x => x.Id == userId).FirstOrDefault();
+		//var thefuck = userList.FirstOrDefault();
+		userProfile = userList.Where(x => x.User.Id == UserId).FirstOrDefault();
 	}
 
 	protected async Task Update()
@@ -69,7 +75,7 @@
 		}
 
 		UserProfileServices.UpdateUserProfile(userProfile);
-		NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
+		NavigationManager.NavigateTo($"/user-detail");
 	}
 
 	protected void Cancel()

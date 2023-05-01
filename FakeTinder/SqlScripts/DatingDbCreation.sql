@@ -64,25 +64,7 @@ create table Likes
 	Likee int foreign key references UserProfile(Id) not null,
 	[Status] int not null default 0,
 )
-go
 
-create table [Messages]
-(
-	Id int primary key identity(1,1),
-	Sender int foreign key references UserProfile(Id) not null,
-	Receiver int foreign key references UserProfile(Id) not null,
-	[Status] int not null default 0,
-	Msg nvarchar(255) null
-)
-go
-create table [OldMessages]
-(
-	Id int primary key not null,
-	Sender int not null,
-	Receiver int not null,
-	[Status] int not null,
-	Msg nvarchar(255) null
-)
 go
 
 -- create non-clustered index on column GenderId of table UserProfile
@@ -92,19 +74,6 @@ ON UserProfile (GenderId);
 -- Create trigger on table Message for After Delete. Will insert the deleted row in OldMessages table.
 /* After DELETE trigger on [Messages] table */
 
-IF OBJECT_ID('TRG_DeleteSyncMessages') IS NOT NULL
-DROP TRIGGER TRG_DeleteSyncMessages
-GO
-
-CREATE TRIGGER TRG_DeleteSyncMessages 
-ON dbo.[Messages]
-AFTER DELETE
-AS
-BEGIN
-INSERT INTO dbo.[OldMessages]
-SELECT * FROM DELETED
-END
-GO
 
 -- Create data for the tables
 

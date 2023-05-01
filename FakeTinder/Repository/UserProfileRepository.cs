@@ -42,6 +42,7 @@ namespace FakeTinder.Repository
 					userProfile.Gender.GenderName = rdr["GenderName"] == DBNull.Value ? null : rdr.GetString("GenderName").ToString();
 
 					userProfile.User = new UserEntity();
+					userProfile.User.Id = Convert.ToInt32(rdr["UserID"]);
 					userProfile.User.FirstName = rdr["FirstName"].ToString();
 					userProfile.User.LastName = rdr["LastName"].ToString();
 					userProfile.User.Email = rdr["Email"].ToString();

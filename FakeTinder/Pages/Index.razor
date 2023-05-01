@@ -5,6 +5,7 @@
 @inject NavigationManager NavigationManager
 @inject IUserService UserServices
 @inject IAdoGetProfileData AdoGetProfileData
+@inject LoggedUserService LoggedUserService
 @using System.ComponentModel.DataAnnotations
 
 
@@ -43,11 +44,11 @@
 
 	protected async Task SubmitLogin()
 	{
-		user = UserServices.GetLogin(loginUser.InLogin, loginUser.InPassword);
+		LoggedUserService.User = UserServices.GetLogin(loginUser.InLogin, loginUser.InPassword);
 
-		if (loginUser.InLogin == user.Login && loginUser.InPassword == user.Password)
+		if (loginUser.InLogin == LoggedUserService.User.Login && loginUser.InPassword == LoggedUserService.User.Password)
 		{
-			NavigationManager.NavigateTo($"/user-detail/{user.Id.ToString()}");
+			NavigationManager.NavigateTo($"/user-detail/");
 		}
 		else
 		{
