@@ -34,8 +34,14 @@ namespace FakeTinder.Repository
 					userProfile.BirthDate = Convert.ToDateTime(rdr["BirthDate"].ToString());
 					userProfile.Height = Convert.ToInt32(rdr["Height"]);
 					userProfile.AboutMe = rdr["AboutMe"] == DBNull.Value? null : rdr.GetString("AboutMe").ToString();
+
+					userProfile.City = new CityEntity();
 					userProfile.City.CityName = rdr["CityName"] == DBNull.Value ? null : rdr.GetString("CityName").ToString();
+					
+					userProfile.Gender = new GenderEntity();
 					userProfile.Gender.GenderName = rdr["GenderName"] == DBNull.Value ? null : rdr.GetString("GenderName").ToString();
+
+					userProfile.User = new UserEntity();
 					userProfile.User.FirstName = rdr["FirstName"].ToString();
 					userProfile.User.LastName = rdr["LastName"].ToString();
 					userProfile.User.Email = rdr["Email"].ToString();
