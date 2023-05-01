@@ -41,11 +41,25 @@
 		</div>
 		<ValidationMessage For="@(() => userProfile.BirthDate)" />
 	</div>
-	<div>
+	<div class="md-3">
 		<div class="mb-3">
 			<label for="Height" class="form-label">Height</label>
 			<div class="col-md-4">
 				<InputNumber class="form-control" @bind-Value="userProfile.Height" />
+			</div>
+		</div>
+	</div>
+	<div class="md-3">
+		<div class="col-sm-12">
+			<label for="Gender" class="form-label">Gender </label>
+			<div class="col-md-4">
+				<select class="form-select-sm" aria-label=".form-select-sm">
+					<option selected>Gender</option>
+					@foreach (var gen in gender)
+					{
+						<option value="@gen.Id">@gen.GenderName</option>
+					}
+				</select>
 			</div>
 		</div>
 	</div>
@@ -56,6 +70,7 @@
 	public int UserId { get; set; }
 	protected UserEntity user;
 	protected UserProfileEntity userProfile;
+	protected IEnumerable<GenderEntity> gender;
 
 	protected override void OnInitialized()
 	{
@@ -63,8 +78,9 @@
 		userProfile = new UserProfileEntity();
 		UserId = LoggedUserService.User.Id;
 		var userList = UserProfileServices.GetAllUserProfiles();
-		//var thefuck = userList.FirstOrDefault();
 		userProfile = userList.Where(x => x.User.Id == UserId).FirstOrDefault();
+		gender = GetProfileDataService.GetGender();
+
 	}
 
 	protected async Task Update()
