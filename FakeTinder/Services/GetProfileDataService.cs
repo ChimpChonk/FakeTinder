@@ -1,10 +1,9 @@
 ﻿using FakeTinder.Models;
 using FakeTinder.Data;
-using FakeTinder.Repository;
 
 namespace FakeTinder.Services
 {
-	public class GetProfileDataService : IGetProfileDataService
+    public class GetProfileDataService : IGetProfileDataService
 	{
 
 		private readonly IAdoGetProfileData adoGetProfileData;

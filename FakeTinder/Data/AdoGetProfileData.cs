@@ -1,12 +1,11 @@
-﻿using FakeTinder.Repository;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
 using System.Data.Common;
 using FakeTinder.Models;
 
 namespace FakeTinder.Data
 {
-	public class AdoGetProfileData : IAdoGetProfileData
+    public class AdoGetProfileData : IAdoGetProfileData
 	{
 		private CityEntity _city;
 		private GenderEntity _gender;

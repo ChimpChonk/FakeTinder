@@ -63,6 +63,20 @@
 			</div>
 		</div>
 	</div>
+	<div class="md-3">
+		<div class="col-sm-12">
+			<label for="City" class="form-label">City </label>
+			<div class="col-md-4">
+				<select class="form-select-sm" aria-label=".form-select-sm">
+					<option selected>City</option>
+					@foreach (var cities in city)
+					{
+						<option value="@cities.Id">@cities.CityName</option>
+					}
+				</select>
+			</div>
+		</div>
+	</div>
 </EditForm>
 
 @code {
@@ -71,6 +85,7 @@
 	protected UserEntity user;
 	protected UserProfileEntity userProfile;
 	protected IEnumerable<GenderEntity> gender;
+	protected IEnumerable<CityEntity> city;
 
 	protected override void OnInitialized()
 	{
@@ -80,7 +95,7 @@
 		var userList = UserProfileServices.GetAllUserProfiles();
 		userProfile = userList.Where(x => x.User.Id == UserId).FirstOrDefault();
 		gender = GetProfileDataService.GetGender();
-
+		city = GetProfileDataService.GetCity();
 	}
 
 	protected async Task Update()
