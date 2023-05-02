@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace FakeTinder.Repository
 {
@@ -47,6 +48,17 @@ namespace FakeTinder.Repository
 					userProfile.User.LastName = rdr["LastName"].ToString();
 					userProfile.User.Email = rdr["Email"].ToString();
 
+					try
+					{
+					userProfile.ProfilePicture = new ProfilePictureEntity();
+					userProfile.ProfilePicture.PicURL = rdr["PicURL"] == DBNull.Value ? null : rdr.GetString("PicURL").ToString();
+
+					}
+					catch (Exception ex)
+					{
+						Debug.WriteLine(ex.Message);
+					}
+
 					lstUsers.Add(userProfile);
 				}
 				con.Close();
@@ -60,18 +72,15 @@ namespace FakeTinder.Repository
 			bool returnValue = true;
 			using (SqlConnection con = new SqlConnection(connectionString))
 			{
-				SqlCommand cmd = new SqlCommand("usp_UpdateUserProfile", con);
+				SqlCommand cmd = new SqlCommand("usp_UpdateUserProfilByUserId", con);
 				cmd.CommandType = CommandType.StoredProcedure;
-
-				cmd.Parameters.AddWithValue("@UserName", userProfile.UserName);
-				//cmd.Parameters.AddWithValue("@FirstName", userProfile.User.FirstName);
-				//cmd.Parameters.AddWithValue("@LastName", userProfile.User.LastName);
+				cmd.Parameters.AddWithValue("@Usersid", userProfile.Id);
 				cmd.Parameters.AddWithValue("@BirthDate", userProfile.BirthDate);
 				cmd.Parameters.AddWithValue("@AboutMe", userProfile.AboutMe);
 				cmd.Parameters.AddWithValue("@Height", userProfile.Height);
-				cmd.Parameters.AddWithValue("@GenderName", userProfile.Gender.Id);
-				cmd.Parameters.AddWithValue("@CityName", userProfile.City.Id);
-				//cmd.Parameters.AddWithValue("@Email", userProfile.User.Email);
+				cmd.Parameters.AddWithValue("@GenderId", userProfile.Gender.Id);
+				cmd.Parameters.AddWithValue("@CityId", userProfile.City.Id);
+				cmd.Parameters.AddWithValue("@PicURL", userProfile.ProfilePicture.PicURL);
 				con.Open();
 				int res = cmd.ExecuteNonQuery();
 				con.Close();

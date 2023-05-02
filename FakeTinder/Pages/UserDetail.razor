@@ -6,11 +6,20 @@
 @inject IGetProfileDataService GetProfileDataService
 @inject LoggedUserService LoggedUserService
 
-<PageTitle>@user.Login Detail</PageTitle>
+<PageTitle>@LoggedUserService.User.Login Detail</PageTitle>
 
 <div class="position-absolute top-50 start-50 translate-middle " style="display: flex; justify-content: center;">
 	<div class="card " style="width: 28rem;">
-		<img src="/Img/person-badge.svg" class="card-img-top">
+
+		@if (!valid)
+		{
+			<img src=@picUrl class="card-img-top" />
+		}
+		else
+		{
+			<img src=@picUrl class="card-img-top" />
+		}
+
 		<div class="card-body">
 			<h2 class="card-title" style="text-align: center;">@user.Login</h2>
 		</div>
@@ -35,8 +44,10 @@
 @code {
 	public int UserId { get; set; }
 
-	protected UserEntity user = new();
-	protected UserProfileEntity userProfile = new();
+	protected UserEntity user;
+	protected UserProfileEntity userProfile;
+	private string picUrl;
+	private bool valid;
 
 	protected string Age()
 	{
@@ -46,9 +57,21 @@
 
 	protected override void OnInitialized()
 	{
+		user = new UserEntity();
+		userProfile = new UserProfileEntity();
 		UserId = LoggedUserService.User.Id;
 		var userList = UserProfileServices.GetAllUserProfiles();
 		userProfile = userList.Where(x => x.Id == UserId).FirstOrDefault();
+
+		if (userProfile.ProfilePicture.PicURL == null)
+		{
+			picUrl = "person-badge.svg";
+		}
+		else
+		{
+			picUrl = userProfile.ProfilePicture.PicURL;
+			valid = true;
+		}
 	}
 
 	protected async Task LogOut()

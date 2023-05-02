@@ -9,75 +9,86 @@
 
 <PageTitle>Update detail</PageTitle>
 
-<EditForm Model="@user" OnValidSubmit="Update">
-	<DataAnnotationsValidator />
-	<div class="mb-3">
+<div style="display: flex; justify-content: center;">
+	<EditForm Model="@userProfile" OnValidSubmit="Update">
+		<DataAnnotationsValidator />
+		@*<div class="mb-3">
 		<label for="FirstName" class="form-label">First Name</label>
-		<div class="col-md-4">
-			<InputText class="form-control" @bind-Value="userProfile.User.FirstName" />
+		<div class="col-md-15">
+		<InputText class="form-control" @bind-Value="userProfile.User.FirstName" />
 		</div>
 		<ValidationMessage For="@(() => userProfile.User.FirstName)" />
-	</div>
-	<div class="mb-3">
+		</div>
+		<div class="mb-3">
 		<label for="LastName" class="form-label">Last Name</label>
-		<div class="col-md-4">
-			<InputText class="form-control" @bind-Value="userProfile.User.LastName" />
+		<div class="col-md-15">
+		<InputText class="form-control" @bind-Value="userProfile.User.LastName" />
 		</div>
 		<ValidationMessage For="@(() => userProfile.User.LastName)" />
-	</div>
-	<div class="mb-3">
-		<label for="UserName" class="form-label">User Name</label>
-		<div class="col-md-4">
-			<InputText class="form-control" @bind-Value="userProfile.UserName" />
-		</div>
-		<ValidationMessage For="@(() => userProfile.UserName)" />
-	</div>
-	<div class="md-3">
-		<div class="col-sm-12">
-			<label for="BirthDate" class="form-label">Birth Date</label>
-			<div class="col-md-4">
-				<input type="date" @bind-value="userProfile.BirthDate" />
-			</div>
-		</div>
-		<ValidationMessage For="@(() => userProfile.BirthDate)" />
-	</div>
-	<div class="md-3">
+		</div>*@
 		<div class="mb-3">
-			<label for="Height" class="form-label">Height</label>
-			<div class="col-md-4">
-				<InputNumber class="form-control" @bind-Value="userProfile.Height" />
+			<label for="PicURL" class="form-label">picURl</label>
+			<div class="col-md-15">
+				<InputText class="form-control" @bind-Value="userProfile.ProfilePicture.PicURL" />
 			</div>
 		</div>
-	</div>
-	<div class="md-3">
-		<div class="col-sm-12">
-			<label for="Gender" class="form-label">Gender </label>
-			<div class="col-md-4">
-				<select class="form-select-sm" aria-label=".form-select-sm">
-					<option selected>Gender</option>
-					@foreach (var gen in gender)
-					{
-						<option value="@gen.Id">@gen.GenderName</option>
-					}
-				</select>
+		<div class="mb-3">
+			<label for="AboutMe" class="form-label">About me</label>
+			<div class="col-md-15">
+				<InputText class="form-control" @bind-Value="userProfile.AboutMe" />
 			</div>
 		</div>
-	</div>
-	<div class="md-3">
-		<div class="col-sm-12">
-			<label for="City" class="form-label">City </label>
-			<div class="col-md-4">
-				<select class="form-select-sm" aria-label=".form-select-sm">
-					<option selected>City</option>
-					@foreach (var cities in city)
-					{
-						<option value="@cities.Id">@cities.CityName</option>
-					}
-				</select>
+		<div class="md-3">
+			<div class="md-3">
+				<label for="BirthDate" class="form-label">Birth Date</label>
+				<div class="col-md-15">
+					<input type="date" @bind-value="userProfile.BirthDate" />
+				</div>
+			</div>
+			<ValidationMessage For="@(() => userProfile.BirthDate)" />
+		</div>
+		<div class="md-3">
+			<div class="mb-3">
+				<label for="Height" class="form-label">Height in CM</label>
+				<div class="col-md-15">
+					<InputNumber class="form-control" @bind-Value="userProfile.Height" />
+				</div>
 			</div>
 		</div>
-	</div>
-</EditForm>
+		<div class="md-3">
+			<div class="col-sm-12">
+				<label for="Gender" class="form-label">Gender </label>
+				<div class="col-md-4">
+					<InputSelect class="form-select-sm" aria-label=".form-select-sm" @bind-Value="userProfile.Gender.Id">
+						<option selected>Gender</option>
+						@foreach (var gen in gender)
+						{
+							<option value="@gen.Id">@gen.GenderName</option>
+						}
+					</InputSelect>
+				</div>
+			</div>
+		</div>
+		<div class="md-3">
+			<div class="col-sm-12">
+				<label for="City" class="form-label">City </label>
+				<div class="col-md-4">
+					<InputSelect class="form-select-sm" aria-label=".form-select-sm" @bind-Value="userProfile.City.Id">
+						<option selected>City</option>
+						@foreach (var cities in city)
+						{
+							<option value="@cities.Id">@cities.CityName</option>
+						}
+					</InputSelect>
+				</div>
+			</div>
+		</div>
+		<div class="md-3">
+			@*			<button type="button" class=" btn btn-success">Update</button>*@
+			<button type="button" @onclick="(async () => await Update())" class=" btn btn-success">Submit</button>
+		</div>
+	</EditForm>
+</div>
 
 @code {
 
@@ -100,13 +111,16 @@
 
 	protected async Task Update()
 	{
-		if (user.Id < 1)
+		if (userProfile.User.Id < 1)
 		{
 			return;
 		}
 
-		UserProfileServices.UpdateUserProfile(userProfile);
-		NavigationManager.NavigateTo($"/user-detail");
+		else
+		{
+			UserProfileServices.UpdateUserProfile(userProfile);
+			NavigationManager.NavigateTo("/user-detail");
+		}
 	}
 
 	protected void Cancel()

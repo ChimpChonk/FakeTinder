@@ -9,7 +9,11 @@ BEGIN
     AboutMe = @aboutme,
     CityId = @cityid,
     GenderId = @genderid
-    WHERE UsersId = @usersid
+    WHERE UsersId = @usersid;
+
+    UPDATE [dbo].[ProfilePictures] SET
+	PicURL = @picURL
+	WHERE Id = @usersid
 END
 --USE [DATING]
 --GO 

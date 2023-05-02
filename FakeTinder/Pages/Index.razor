@@ -11,20 +11,20 @@
 
 
 <PageTitle>Login</PageTitle>
-<div>
+<div style="display:flex; justify-content: center">
 	<EditForm Model="loginUser">
 		<DataAnnotationsValidator />
 		<div>
-			<div class="mb-2">
+			<div class="mb-3">
 				<label for="FirstName" class="form-label">Login</label>
-				<div class="col-md-4">
+				<div class="col-md-15">
 					<InputText class="form-control" @bind-Value="loginUser.InLogin" />
 				</div>
 				<ValidationMessage For="@(() => loginUser.InLogin)" />
 			</div>
 			<div class="mb-3">
 				<label for="Password">Password</label>
-				<div class="col-md-4">
+				<div class="col-md-15">
 					<InputText type="password" class="form-control" @bind-Value="loginUser.InPassword" />
 				</div>
 				<ValidationMessage For="@(() => loginUser.InPassword)" />
@@ -48,7 +48,7 @@
 
 		if (loginUser.InLogin == LoggedUserService.User.Login && loginUser.InPassword == LoggedUserService.User.Password)
 		{
-			NavigationManager.NavigateTo($"/user-detail/");
+			NavigationManager.NavigateTo("/user-detail");
 		}
 		else
 		{

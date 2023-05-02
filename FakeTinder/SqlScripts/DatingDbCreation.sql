@@ -49,10 +49,11 @@ create table UserProfile
 )
 
 go
-create table ProfilePictures
+USE [Dating]
+CREATE table ProfilePictures
 (
 	Id int primary key identity(1,1),
-	PicURL nvarchar(100) not null,
+	PicURL nvarchar(255) null,
 	UserProfileId int foreign key references UserProfile(Id)
 )
 go
