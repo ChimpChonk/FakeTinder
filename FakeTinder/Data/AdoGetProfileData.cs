@@ -7,6 +7,7 @@ namespace FakeTinder.Data
 {
     public class AdoGetProfileData : IAdoGetProfileData
 	{
+		//get all data here
 		private CityEntity _city;
 		private GenderEntity _gender;
 
