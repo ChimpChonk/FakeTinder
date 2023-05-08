@@ -25,6 +25,31 @@
 		</div>
 		<ValidationMessage For="@(() => userProfile.User.LastName)" />
 	</div>
+	<div class="mb-3">
+		<label for="UserName" class="form-label">User name</label>
+		<div class="col-md-15">
+			<InputText class="form-control" @bind-Value="userProfile.UserName" />
+		</div>
+		<ValidationMessage For="@(() => userProfile.UserName)" />
+	</div>
+	<div class="mb-3">
+		<label for="Password" class="form-label">Password</label>
+		<div class="col-md-15">
+			<InputText class="form-control" @bind-Value="userProfile.User.Password" />
+		</div>
+		<ValidationMessage For="@(() => userProfile.User.Password)" />
+	</div>
+	<div class="mb-3">
+		<label for="Password2" class="form-label">Co-Password</label>
+		<div class="col-md-15">
+			<InputText class="form-control" @bind-Value="userProfile.User.Password2" />
+		</div>
+		<ValidationMessage For="@(() => userProfile.User.Password2)" />
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary">Save</button>
+		<button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+	</div>
 </EditForm>
 
 @code {
@@ -36,5 +61,26 @@
 	{
 		user = new();
 		userProfile = new();
+		var userList = UserProfileServices.GetAllUserProfiles();
+		userProfile = userList.Where(x => x.User.Id == userId).FirstOrDefault();
+	}
+
+	protected async Task Update()
+	{
+		if (userProfile.User.Id < 1)
+		{
+			return;
+		}
+
+		else
+		{
+			UserProfileServices.UpdateUserProfile(userProfile);
+			NavigationManager.NavigateTo("/user-detail");
+		}
+	}
+
+	protected void Cancel()
+	{
+		NavigationManager.NavigateTo("/user-detail");
 	}
 }			
