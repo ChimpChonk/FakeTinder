@@ -31,4 +31,10 @@
 	public int userId { get; set; }
 	public UserEntity user { get; set; }
 	public UserProfileEntity userProfile { get; set; }
-}
+
+	protected override void OnInitialized()
+	{
+		user = new();
+		userProfile = new();
+	}
+}			
